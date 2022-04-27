@@ -10,21 +10,21 @@ const fs = require("fs");
 //ipfs access path https://ipfs.io/ipfs/<CID>
 async function ipfsClient() {
     const ipfs = await create({
-        host: "ipfs.staging.infura.org",
+        host: "127.0.0.1",
         post: 5001,
-        protocol: "https",
+        protocol: "http",
     });
     return ipfs;
 }
 
 async function saveText() {
     let ipfs = await ipfsClient();
-        const options = {
+    const options = {
         pin: true,
-        wrapWithDirectory: true,
+        wrapWithDirectory: false,
         timeout: 10000
     };
-    let result = await ipfs.add({ path: "myfile.txt'", content: "Hello" });
+    let result = await ipfs.add({ path: "myfile.txt'", content: "Hello" }, options);
     console.log(result);
 }
 
@@ -44,13 +44,12 @@ async function saveJson() {
 async function saveSingleFile() {
     let ipfs = await ipfsClient();
     let data = fs.readFileSync("./mountain.png");
-    let options = {
-        pin: true
+    const options = {
+        pin: true,
+        wrapWithDirectory: false,
+        timeout: 10000
     };
-    let result = await ipfs.add({
-        path: "hello.png",
-        content: data,
-    });
+    let result = await ipfs.add({path: "hello.png",content: data}, options);
     console.log(result);
 }
 async function saveMultiFile() {
@@ -60,26 +59,26 @@ async function saveMultiFile() {
         wrapWithDirectory: true,
         timeout: 10000
     };
-    
-    for await (const file of ipfs.addAll(globSource('./docs', '**/*'),options)) {
+
+    for await (const file of ipfs.addAll(globSource('./ipfsfiles', '**/*'), options)) {
         console.log(file)
     }
 }
 // infura:not support yet.only  localhost
-async function createDir(){
+async function createDir() {
     let ipfs = await ipfsClient();
     await ipfs.files.mkdir('/mss');
     let res = await ipfs.files.stat("/mss");
     console.log(res);
 }
 
-async function cpToDir(){
+async function cpToDir() {
     let ipfs = await ipfsClient();
-    await ipfs.files.cp("/ipfs/QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j","/my/0");
+    await ipfs.files.cp("/ipfs/QmTp2hEo8eXRp6wg7jXv1BLCMh5a4F3B7buAUZNZUu772j", "/my/0");
 }
-saveText();
+// saveText();
 // saveJson();
 // saveSingleFile();
-// saveMultiFile();
+saveMultiFile();
 // createDir();
 // cpToDir()
