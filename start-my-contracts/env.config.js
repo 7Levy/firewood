@@ -1,7 +1,7 @@
 // envs/.env.${NODE_ENV}
 // node your_script.js --node-env=test
 // BASH：export NODE_ENV=${env_name}
-require('dotenv-flow').config({ path: 'envs/', default_node_env: 'bsctest', silent: true });
+require('dotenv-flow').config({ path: 'envs/', default_node_env: 'dev', silent: true });
 
 
 const rpcs = {
