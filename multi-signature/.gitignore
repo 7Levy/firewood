@@ -1,8 +1,0 @@
-envs
-artifacts
-cache
-.vscode
-data
-node_modules
-flat
-deployments
