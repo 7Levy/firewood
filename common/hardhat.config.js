@@ -14,10 +14,6 @@ module.exports = {
   // network
   defaultNetwork: "bsctest",
   networks: {
-    dxt: {
-      url: rpcs.dxt,
-      accounts: accountsKeys,
-    },
     rinkeby: {
       url: rpcs.rinkeby,
       accounts: accountsKeys,
