@@ -12,7 +12,7 @@ const writeFile = util.promisify(fs.writeFile);
  */
 async function writeAddr(addr, name){
   const chainid = network.config.chainId;
-  const saveDir = path.resolve(__dirname, `../deployments/${chainid}/`);
+  const saveDir = path.resolve(__dirname, `../../deployments/${chainid}/`);
 
   if (!fs.existsSync(saveDir)) {
     fs.mkdirSync(saveDir);
@@ -29,7 +29,7 @@ async function writeAddr(addr, name){
 
 async function writeJson(key, value, name){
   const chainid = network.config.chainId;
-  const saveDir = path.resolve(__dirname, `../deployments/${chainid}/`);
+  const saveDir = path.resolve(__dirname, `../../deployments/${chainid}/`);
 
   if (!fs.existsSync(saveDir)) {
     fs.mkdirSync(saveDir);

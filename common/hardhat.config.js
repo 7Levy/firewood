@@ -2,9 +2,11 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-web3");
 require("@nomiclabs/hardhat-ethers");
+require('hardhat-deploy');
 require('solidity-coverage'); //yarn hardhat coverage
 require('hardhat-abi-exporter');
 require('@primitivefi/hardhat-dodoc');
+require("@nomiclabs/hardhat-etherscan");
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -12,9 +14,11 @@ require('@primitivefi/hardhat-dodoc');
 const { rpcs, accountsKeys } = require("./env.config.js");
 module.exports = {
   // network
-  defaultNetwork: "bsctest",
+  defaultNetwork: "hardhat",
   networks: {
+    hardhat:{},
     rinkeby: {
+      chainId:4,
       url: rpcs.rinkeby,
       accounts: accountsKeys,
     },
@@ -23,6 +27,12 @@ module.exports = {
       url: rpcs.bsctest,
       accounts: accountsKeys,
     },
+  },
+  // etherscan
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: "RZMTNZ3TP4GY7G4M1747INNQMVQQ7I6GCH"
   },
   // compile
   solidity: {
