@@ -2,7 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-web3");
 require("@nomiclabs/hardhat-ethers");
-require('hardhat-deploy');
+// require('hardhat-deploy');
 require('solidity-coverage'); //yarn hardhat coverage
 require('hardhat-abi-exporter');
 require('@primitivefi/hardhat-dodoc');
