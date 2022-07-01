@@ -4,5 +4,5 @@ cache
 .vscode
 data
 node_modules
-flat
+coverage
 deployments
