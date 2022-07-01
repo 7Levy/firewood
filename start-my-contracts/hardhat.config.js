@@ -2,23 +2,26 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-truffle5");
 require("@nomiclabs/hardhat-web3");
 require("@nomiclabs/hardhat-ethers");
+// require('hardhat-deploy');
 require('solidity-coverage'); //yarn hardhat coverage
 require('hardhat-abi-exporter');
 require('@primitivefi/hardhat-dodoc');
+require("@nomiclabs/hardhat-etherscan");
+// require("hardhat-gas-reporter");
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 
-const { rpcs, accountsKeys } = require("./env.config.js");
+const { rpcs, accountsKeys, etherscanKeys } = require("./env.config.js");
 module.exports = {
   // network
-  defaultNetwork: "bsctest",
+  defaultNetwork: "hardhat",
   networks: {
-    dxt: {
-      url: rpcs.dxt,
-      accounts: accountsKeys,
+    hardhat: {
+      chainId: 31337
     },
     rinkeby: {
+      chainId: 4,
       url: rpcs.rinkeby,
       accounts: accountsKeys,
     },
@@ -27,10 +30,30 @@ module.exports = {
       url: rpcs.bsctest,
       accounts: accountsKeys,
     },
+    goerli:{
+      chainId:5,
+      url:rpcs.goerli,
+      accountsKeys:accountsKeys
+    }
+  },
+  // etherscan
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: etherscanKeys
   },
   // compile
   solidity: {
     compilers: [
+      {
+        version: "0.6.9",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 9999
+          }
+        },
+      },
       {
         version: "0.8.12",
         settings: {
@@ -65,6 +88,10 @@ module.exports = {
     debugMode: false,
     outputDir: "./data/docs",
     freshOutput: true
-  }
+  },
+  // gasReporter: {
+  //   currency: 'USD',
+  //   enabled: true
+  // }
 };
 

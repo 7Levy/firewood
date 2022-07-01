@@ -7,12 +7,13 @@ require('dotenv-flow').config({ path: 'envs/', default_node_env: 'dev', silent: 
 const rpcs = {
     rinkeby: `https://rinkeby.infura.io/v3/${process.env.RINKEBY_KEY}`,
     bsctest:"https://data-seed-prebsc-1-s1.binance.org:8545",
+    goerli:`https://goerli.infura.io/v3/${process.env.GOERLI_KEY}`,
     ipfs_infura:""
 }
 
 const accounts = process.env.ACCOUNTS ? process.env.ACCOUNTS.split(",") : []
 const accountsKeys = process.env.PRIVATE_KEYS ? process.env.PRIVATE_KEYS.split(",") : []
-
-module.exports = { rpcs, accounts, accountsKeys }
+const etherscanKeys = process.env.ETHERSCAN_KEYS ? process.env.ETHERSCAN_KEYS.split(",") : []
+module.exports = { rpcs, accounts, accountsKeys,etherscanKeys }
 
 

@@ -9,3 +9,4 @@ mkdir scripts
 mkdir test
 mkdir envs
 npm install
+yarn install
